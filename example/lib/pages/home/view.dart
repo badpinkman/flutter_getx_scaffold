@@ -1,15 +1,15 @@
 import 'dart:io';
 
+import 'package:example/common/langs/index.dart';
 import 'package:example/pages/base_widgets/index.dart';
 import 'package:example/pages/dialog/index.dart';
+import 'package:example/pages/language/index.dart';
 import 'package:example/pages/load_container/index.dart';
 import 'package:example/pages/network/index.dart';
 import 'package:example/pages/permission/index.dart';
+import 'package:example/pages/theme/index.dart';
 import 'package:example/pages/theme_color/index.dart';
 import 'package:flutter/material.dart';
-import 'package:example/common/langs/index.dart';
-import 'package:example/pages/language/index.dart';
-import 'package:example/pages/theme/index.dart';
 import 'package:getx_scaffold/getx_scaffold.dart';
 
 import 'index.dart';
@@ -168,7 +168,7 @@ class HomePage extends GetView<HomeController> {
         .toListView(
           separator: const DividerX(),
         )
-        .scrollbar()
+        // .scrollbar()
         .safeArea();
   }
 
