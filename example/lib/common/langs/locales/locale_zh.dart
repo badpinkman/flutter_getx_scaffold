@@ -24,4 +24,5 @@ const Map<String, String> zh = {
   TextKey.jiZaiRongQiZuJian: '加载容器组件',
   TextKey.qingChuTuPianHuanCun: '清除全部图片缓存',
   TextKey.shenQingQuanXian: '申请权限',
+  '绘图': '绘图'
 };

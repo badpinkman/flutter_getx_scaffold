@@ -24,4 +24,5 @@ const Map<String, String> es = {
   TextKey.jiZaiRongQiZuJian: 'Componentes del contenedor de carga',
   TextKey.qingChuTuPianHuanCun: 'Borrar toda la caché de imágenes',
   TextKey.shenQingQuanXian: 'Autoridad de solicitud',
+  '绘图': '绘图 Eng'
 };

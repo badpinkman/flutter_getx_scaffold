@@ -24,4 +24,5 @@ const Map<String, String> en = {
   TextKey.jiZaiRongQiZuJian: 'Loading container widget',
   TextKey.qingChuTuPianHuanCun: 'Clear disk cached images',
   TextKey.shenQingQuanXian: 'Request permission',
+  '绘图': '绘图 Eng'
 };

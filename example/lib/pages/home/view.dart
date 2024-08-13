@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:example/common/langs/index.dart';
 import 'package:example/pages/base_widgets/index.dart';
 import 'package:example/pages/dialog/index.dart';
+import 'package:example/pages/draw/index.dart';
 import 'package:example/pages/language/index.dart';
 import 'package:example/pages/load_container/index.dart';
 import 'package:example/pages/network/index.dart';
@@ -20,6 +21,12 @@ class HomePage extends GetView<HomeController> {
   // 主视图
   Widget _buildView() {
     return <Widget>[
+      ListTile(
+        title: Text('绘图'.tr),
+        onTap: () {
+          Get.to(() => const DrawPage());
+        },
+      ),
       ListTile(
         title: Text(TextKey.zhuTi.tr),
         onTap: () {
