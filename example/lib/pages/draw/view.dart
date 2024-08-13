@@ -1,3 +1,4 @@
+import 'package:example/pages/draw/widgets/paper_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:getx_scaffold/common/index.dart';
 
@@ -8,9 +9,7 @@ class DrawPage extends GetView<DrawController> {
 
   // 主视图
   Widget _buildView() {
-    return const Center(
-      child: Text("DrawPage"),
-    );
+    return const PaperWidget();
   }
 
   @override
