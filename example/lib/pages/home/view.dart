@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:example/common/langs/index.dart';
+import 'package:example/pages/anim/view.dart';
 import 'package:example/pages/base_widgets/index.dart';
 import 'package:example/pages/dialog/index.dart';
 import 'package:example/pages/draw/index.dart';
@@ -21,6 +22,12 @@ class HomePage extends GetView<HomeController> {
   // 主视图
   Widget _buildView() {
     return <Widget>[
+      ListTile(
+        title: Text('动画'.tr),
+        onTap: () {
+          Get.to(() => const AnimPage());
+        },
+      ),
       ListTile(
         title: Text('绘图'.tr),
         onTap: () {
