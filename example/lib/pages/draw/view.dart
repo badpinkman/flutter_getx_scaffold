@@ -1,15 +1,15 @@
+import 'package:example/pages/draw/widgets/06_like_circle/paper.dart';
 import 'package:flutter/material.dart';
 import 'package:getx_scaffold/common/index.dart';
 
 import 'index.dart';
-import 'widgets/paper_widget_3.dart';
 
 class DrawPage extends GetView<DrawController> {
   const DrawPage({super.key});
 
   // 主视图
   Widget _buildView() {
-    return const PaperWidget3();
+    return const Paper();
   }
 
   @override
