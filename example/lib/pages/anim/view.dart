@@ -1,15 +1,15 @@
+import 'package:example/pages/anim/widgets/05_simple/04_compare/main.dart';
 import 'package:flutter/material.dart';
 import 'package:getx_scaffold/common/index.dart';
 
 import 'index.dart';
-import 'widgets/01/03_typer/text_typer.dart';
 
 class AnimPage extends GetView<AnimController> {
   const AnimPage({super.key});
 
   // 主视图
   Widget _buildView() {
-    return const TextTyper();
+    return const Main();
   }
 
   @override
