@@ -1,4 +1,4 @@
-import 'package:example/pages/anim/widgets/05_simple/04_compare/main.dart';
+import 'package:example/pages/anim/widgets/05_simple/08_burst_anim_last/main.dart';
 import 'package:flutter/material.dart';
 import 'package:getx_scaffold/common/index.dart';
 
