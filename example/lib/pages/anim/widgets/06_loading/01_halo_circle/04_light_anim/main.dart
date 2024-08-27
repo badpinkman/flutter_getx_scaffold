@@ -1,4 +1,4 @@
-import 'package:example/pages/anim/widgets/06_loading/03_circle_anim/circle_halo.dart';
+import 'package:example/pages/anim/widgets/06_loading/01_halo_circle/04_light_anim/circle_halo.dart';
 import 'package:flutter/material.dart';
 
 class Main extends StatefulWidget {
