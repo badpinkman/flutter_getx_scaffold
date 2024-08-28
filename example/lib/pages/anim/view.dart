@@ -1,4 +1,4 @@
-import 'package:example/pages/anim/widgets/06_loading/03_cross/03_cross_anim/main.dart';
+import 'package:example/pages/anim/widgets/06_loading/03_cross/04_ovel/03_oval_last/main.dart';
 import 'package:flutter/material.dart';
 import 'package:getx_scaffold/common/index.dart';
 
