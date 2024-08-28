@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -20,6 +21,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// 插件包名
 const String pluginPackageName = 'getx_scaffold';
 
+late final bool isDebugMode;
+
 /// 初始化脚手架
 Future<WidgetsBinding> init({
   bool isDebug = false,
@@ -28,7 +31,8 @@ Future<WidgetsBinding> init({
   int dioTimeOut = 10,
   List<Locale>? supportedLocales,
 }) async {
-  Logger.init(isDebug, logTag, networkLog);
+  isDebugMode = isDebug;
+  Logger.init(isDebugMode, logTag, networkLog);
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   await Get.putAsync(
       () => GlobalService().init(supportedLocales: supportedLocales));
@@ -111,6 +115,11 @@ void showErrorToast(String msg) {
 /// 显示loading
 void showLoading([String? msg]) {
   Loading.show(msg);
+}
+
+/// 显示成功
+void showSuccess([String? msg]) {
+  Loading.success(msg);
 }
 
 /// 显示错误
@@ -381,4 +390,20 @@ Future<bool> requestPhotosPermission() async {
 /// 申请蓝牙权限 仅Android需要申请 IOS默认开启
 Future<bool> requestBluetoothPermission() async {
   return await PermissionUtil.bluetooth();
+}
+
+/// 生成32位唯一字符串
+String generateNonce() {
+  int timestamp = getTimeStamp();
+  int randomNumber = generateRandomNumber(6);
+  return '$timestamp$randomNumber'.md5() ?? '';
+}
+
+/// 生成随机数
+int generateRandomNumber(int length) {
+  final Random random = Random();
+  final minValue = pow(10, length - 1).toInt();
+  final maxValue = pow(10, length).toInt() - 1;
+  final randomNumber = minValue + random.nextInt(maxValue - minValue + 1);
+  return randomNumber;
 }

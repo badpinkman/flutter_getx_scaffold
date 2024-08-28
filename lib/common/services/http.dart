@@ -14,6 +14,13 @@ import 'package:getx_scaffold/getx_scaffold.dart';
 typedef OnResponseHandler = Future<String?> Function(
     Response<dynamic> response);
 
+/// 请求处理拦截器
+/// 如返回true则中断后面流程
+typedef OnRequestHandler = Future<bool> Function(
+    RequestOptions options, RequestInterceptorHandler handler);
+
+typedef OnErrorHandler = Future<String?> Function(DioException err);
+
 /// 网络请求服务
 class HttpService extends GetxService {
   static const showLog = 'showLog';
@@ -162,12 +169,37 @@ class HttpService extends GetxService {
   void setOnResponseHandler(OnResponseHandler? handler) {
     _onResponseHandler = handler;
   }
+
+  OnRequestHandler? _onRequestHandler;
+
+  OnRequestHandler? get onRequestHandler => _onRequestHandler;
+
+  /// 设置请求拦截器
+  void setOnRequestHandler(OnRequestHandler? handler) {
+    _onRequestHandler = handler;
+  }
+
+  OnErrorHandler? _onErrorHandler;
+
+  OnErrorHandler? get onErrorHandler => _onErrorHandler;
+
+  /// 设置错误拦截器
+  void setOnErrorHandler(OnErrorHandler? handler) {
+    _onErrorHandler = handler;
+  }
 }
 
 /// 拦截器
 class DioInterceptors extends Interceptor {
   @override
-  void onRequest(options, handler) {
+  void onRequest(options, handler) async {
+    OnRequestHandler? onRequestHandler = HttpService.to.onRequestHandler;
+    if (onRequestHandler != null) {
+      if (await onRequestHandler(options, handler)) {
+        return;
+      }
+    }
+
     String? authorization = HttpService.to.authorization;
     if (authorization.isNotEmptyOrNull) {
       if (!options.headers.containsKey('Authorization')) {
@@ -201,34 +233,40 @@ class DioInterceptors extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     String? errorMessage;
-    switch (err.type) {
-      case DioExceptionType.connectionTimeout:
-      case DioExceptionType.sendTimeout:
-      case DioExceptionType.receiveTimeout:
-        errorMessage = '服务器连接超时';
-        break;
-      case DioExceptionType.connectionError:
-        errorMessage = '服务器连接失败';
-        break;
-      case DioExceptionType.badCertificate:
-        errorMessage = '无效的证书';
-        break;
-      case DioExceptionType.cancel:
-        errorMessage = '请求取消';
-        break;
-      case DioExceptionType.unknown:
-        if (await isNetworkAvailable()) {
+    OnErrorHandler? onErrorHandler = HttpService.to.onErrorHandler;
+    if (onErrorHandler != null) {
+      errorMessage = await onErrorHandler(err);
+    }
+    if (errorMessage.isEmptyOrNull) {
+      switch (err.type) {
+        case DioExceptionType.connectionTimeout:
+        case DioExceptionType.sendTimeout:
+        case DioExceptionType.receiveTimeout:
+          errorMessage = '服务器连接超时';
+          break;
+        case DioExceptionType.connectionError:
           errorMessage = '服务器连接失败';
-        } else {
-          errorMessage = '设备未连接网络';
-        }
-        break;
-      case DioExceptionType.badResponse:
-        int? statusCode = err.response?.statusCode;
-        if (statusCode != null) {
-          errorMessage = '服务器异常:$statusCode';
-        }
-        break;
+          break;
+        case DioExceptionType.badCertificate:
+          errorMessage = '无效的证书';
+          break;
+        case DioExceptionType.cancel:
+          errorMessage = '请求取消';
+          break;
+        case DioExceptionType.unknown:
+          if (await isNetworkAvailable()) {
+            errorMessage = '服务器连接失败';
+          } else {
+            errorMessage = '设备未连接网络';
+          }
+          break;
+        case DioExceptionType.badResponse:
+          int? statusCode = err.response?.statusCode;
+          if (statusCode != null) {
+            errorMessage = '服务器异常:$statusCode';
+          }
+          break;
+      }
     }
     handler.reject(
       DioException(
