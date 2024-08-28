@@ -1,0 +1,52 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+
+class TickerDemo extends StatefulWidget {
+  const TickerDemo({super.key});
+
+  @override
+  State<TickerDemo> createState() => _TickerDemoState();
+}
+
+class _TickerDemoState extends State<TickerDemo> {
+  late Ticker _ticker;
+
+  @override
+  void initState() {
+    super.initState();
+    // SchedulerBinding.instance.scheduleFrameCallback(_tick);
+    _ticker = Ticker(_tick);
+  }
+
+  void _tick(Duration elapsed) {
+    print('----elapsed:$elapsed---${TimeOfDay.now()}------------');
+  }
+
+  @override
+  void dispose() {
+    _ticker.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _startTicker,
+      child: Container(
+        width: 60,
+        height: 60,
+        color: Colors.green,
+      ),
+    );
+  }
+
+  void _startTicker() {
+    if (_ticker.isTicking) {
+      _ticker.stop();
+    } else {
+      _ticker.start().then((v) {
+        print('start finish!');
+      });
+    }
+  }
+}

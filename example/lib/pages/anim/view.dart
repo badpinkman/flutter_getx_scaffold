@@ -1,4 +1,4 @@
-import 'package:example/pages/anim/widgets/09_implicitly_animated_widget/01_AnimatedOpacity/main.dart';
+import 'package:example/pages/anim/widgets/16_clock/01/main.dart';
 import 'package:flutter/material.dart';
 import 'package:getx_scaffold/common/index.dart';
 
