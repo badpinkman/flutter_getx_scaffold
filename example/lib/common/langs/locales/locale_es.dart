@@ -26,4 +26,5 @@ const Map<String, String> es = {
   TextKey.shenQingQuanXian: 'Autoridad de solicitud',
   '绘图': '绘图 Eng',
   '动画': '动画 Eng',
+  '手势': '手势 Eng',
 };

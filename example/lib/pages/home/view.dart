@@ -11,6 +11,7 @@ import 'package:example/pages/network/index.dart';
 import 'package:example/pages/permission/index.dart';
 import 'package:example/pages/theme/index.dart';
 import 'package:example/pages/theme_color/index.dart';
+import 'package:example/pages/touch/view.dart';
 import 'package:flutter/material.dart';
 import 'package:getx_scaffold/getx_scaffold.dart';
 
@@ -22,6 +23,12 @@ class HomePage extends GetView<HomeController> {
   // 主视图
   Widget _buildView() {
     return <Widget>[
+      ListTile(
+        title: Text('手势'.tr),
+        onTap: () {
+          Get.to(() => const TouchPage());
+        },
+      ),
       ListTile(
         title: Text('动画'.tr),
         onTap: () {

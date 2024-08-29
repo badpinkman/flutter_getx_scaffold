@@ -26,4 +26,5 @@ const Map<String, String> zh = {
   TextKey.shenQingQuanXian: '申请权限',
   '绘图': '绘图',
   '动画': '动画',
+  '手势': '手势',
 };
