@@ -1,4 +1,4 @@
-import 'package:example/pages/anim/widgets/16_clock/01/main.dart';
+import 'package:example/pages/anim/widgets/16_clock/03_particle/main.dart';
 import 'package:flutter/material.dart';
 import 'package:getx_scaffold/common/index.dart';
 
@@ -9,7 +9,7 @@ class AnimPage extends GetView<AnimController> {
 
   // 主视图
   Widget _buildView() {
-    return const Main();
+    return const Main(); // TODO 粒子效果未实现
   }
 
   @override
